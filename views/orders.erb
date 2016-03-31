@@ -1,0 +1,24 @@
+<h2><%= @title %></h2>
+
+<form action="/delivering" method="post" enctype="multipart/form-data">
+	<fieldset>
+	<legend>Manage orders</legend>
+	<table border="0" cellpadding="0" cellspacing="10" class="list">
+		<% @orders.each_with_index do |orders,i| %>
+		<tr<%= ' class="alt"' if i%2==0 %>>
+		<tr>
+			<th>Table</th>
+			<th>Drink type</th>
+			<th>Delivered</th>
+		</tr>
+		<tr>
+			<td><%= orders.tablenr %></td>
+			<td><%= orders.drink.drink_type %></td></td>
+			<td><input type="submit" name="knapp" value="<%= orders.id %>"></td>
+		</tr>
+	<% end %>
+
+	</table>
+	</fieldset>
+</form>
+

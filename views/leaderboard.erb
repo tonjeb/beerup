@@ -1,0 +1,12 @@
+<h2><%= @title %></h2>
+<br/>
+<h3>Table:</h3>
+<table border="0" cellpadding="0" cellspacing="10" class="list">
+	<% @orders.each_with_index do |orders,i| %>
+		<tr<%= ' class="alt"' if i%2==0 %>>
+		<tr>
+			<td><%= orders.tablenr %></td>
+		</tr>
+	<% end %>
+
+</table>

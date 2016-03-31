@@ -1,0 +1,22 @@
+<h2><%= @title %></h2>
+
+<form action="/order_do" method="post" enctype="multipart/form-data">
+	<fieldset>
+	<legend>Ordering</legend>
+		<p>
+			<label>Tablenr:</label><br	/> 
+			<input type="number" name="tablenr" id="tablenr" min="0" max="13" step="1"/>
+		</p>
+
+		<p>
+			<% @drinks.each_with_index do |drinks,i| %>
+				<tr<%= ' class="alt"' if i%2==0 %>>
+				<input type="radio" name="drinkorder" id="drinkorder" value="<%= drinks.id %>"><%= drinks.drink_type %><br>
+			<% end %>
+		</p>
+	
+		<p>
+			<input type="submit" value="Place order">
+		</p>
+	 </fieldset>
+</form>
