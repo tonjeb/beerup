@@ -4,6 +4,7 @@ require 'sinatra'
 require 'dm-core'
 require 'dm-migrations'
 require 'dm-validations'
+require 'C:/Users/Tonje/beerup/lib/authorization'
 #require 'leaderboard'
 
 DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/beerup.db")
@@ -34,6 +35,9 @@ end
 
 DataMapper.auto_upgrade!
 
+helpers do
+	include Sinatra::Authorization
+end
 
 # set utf-8 for outgoing
 before do
@@ -68,11 +72,13 @@ post '/order_do' do
 end
 
 get '/new' do
+	require_admin
 	@title = "Add new drink type"
 	erb :new
 end
 
 post '/create' do
+	require_admin
 	drink_type = params[:drink_type]
 	Kernel.puts "invoked create with #{params[:drink_type]}"
 	@drinks = Drink.new(:drink_type => params[:drink_type])
@@ -87,6 +93,7 @@ get '/list' do
 end
 
 get '/orders' do
+	require_admin
 	@title = "All orders"
 	@orders = Order.all(:delivered => false)
 	erb :orders
