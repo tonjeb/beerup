@@ -68,7 +68,7 @@ post '/order_do' do
 	#drinks = Drink.get(params[:id]).drink_type
 	#table = Order.get(params[:id])
 	#"1 #{drinks} ordered to table #{tablenr}"
-	redirect('/orders')
+	redirect('/done')
 end
 
 get '/new' do
@@ -115,4 +115,8 @@ get '/leaderboard' do
 	erb :leaderboard
 end
 
+get '/done' do
+	@title = "Order complete"
+	#erb :done
+end
 	
