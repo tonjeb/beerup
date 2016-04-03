@@ -19,7 +19,7 @@ module Sinatra
   end
  
   def authorize(username, password)
-    if (username=='admin' && password=='admin1') then
+    if (username=='admin' && password=='admin') then
       true
     else
       false

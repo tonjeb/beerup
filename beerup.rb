@@ -4,7 +4,7 @@ require 'sinatra'
 require 'dm-core'
 require 'dm-migrations'
 require 'dm-validations'
-require 'C:/Users/Tonje/beerup/lib/authorization'
+require_relative 'lib/authorization'
 #require 'leaderboard'
 
 DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/beerup.db")
