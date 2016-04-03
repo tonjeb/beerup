@@ -14,7 +14,7 @@
 		<tr>
 			<td><%= orders.tablenr %></td>
 			<td><%= orders.drink.drink_type %></td></td>
-			<td><input type="submit" name="knapp" value="<%= orders.id %>"></td>
+			<td><a href="delivering?orderid=<%= orders.id %>">x</a></td>
 		</tr>
 	<% end %>
 

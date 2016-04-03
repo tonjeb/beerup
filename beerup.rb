@@ -99,8 +99,8 @@ get '/orders' do
 	erb :orders
 end
 
-post '/delivering' do
-	drikkeid = params[:knapp]
+get '/delivering' do
+	drikkeid = params[:orderid]
 	@order = Order.get(drikkeid)
 	@order.update(:delivered => true)
 	@order.save
