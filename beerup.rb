@@ -28,7 +28,6 @@ class Order
 	property :id,        		Serial  
 	property :delivered,		Boolean, 	 :default => false
 	property :tablenr,			Integer
-	property :drinks_id,		Integer
 	
 	belongs_to :drink#,			:required => false
 	
@@ -63,7 +62,7 @@ post '/order_do' do
 	drinks_id = params[:drinkorder]
 	drinks = Drink.get(drinks_id)
 	Kernel.puts "invoked create with #{params[:tablenr]}"
-	@order = Order.new(:tablenr => params[:tablenr], :delivered => false, :drinks_id => drinks_id, :drink_id => drinks_id)
+	@order = Order.new(:tablenr => params[:tablenr], :delivered => false, :drink_id => drinks_id)
 	@order.save
 	#drinks = Drink.get(params[:id]).drink_type
 	#table = Order.get(params[:id])
