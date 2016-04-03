@@ -11,7 +11,7 @@
 		<p>
 			<% @drinks.each_with_index do |drinks,i| %>
 				<tr<%= ' class="alt"' if i%2==0 %>>
-				<input type="radio" name="drinkorder" id="drinkorder" value="<%= drinks.id %>"><%= drinks.drink_type %><br>
+				<input type="radio" name="drinkorder" id="drinkorder" value="<%= drinks.id %>"><%= drinks.drink_type %> - <%= drinks.price %> kr<br>
 			<% end %>
 		</p>
 	

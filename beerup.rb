@@ -15,6 +15,7 @@ class Drink
 	
 	property :id,        		Serial  
 	property :drink_type,		String,		:unique => true, :required => true
+	property :price,			Integer
 	
 	has n, :orders#, 'Order', :child_key => [:order_id]
 	
@@ -61,8 +62,7 @@ post '/order_do' do
 	tablenr = params[:tablenr]
 	drinks_id = params[:drinkorder]
 	drinks = Drink.get(drinks_id)
-	drinktype = drinks.drink_type
-	Kernel.puts "invoked create with #{params[:tablenr]} and #{drinktype}"
+	Kernel.puts "invoked create with #{params[:tablenr]}"
 	@order = Order.new(:tablenr => params[:tablenr], :delivered => false, :drinks_id => drinks_id, :drink_id => drinks_id)
 	@order.save
 	#drinks = Drink.get(params[:id]).drink_type
@@ -80,8 +80,9 @@ end
 post '/create' do
 	require_admin
 	drink_type = params[:drink_type]
+	price = params[:price]
 	Kernel.puts "invoked create with #{params[:drink_type]}"
-	@drinks = Drink.new(:drink_type => params[:drink_type])
+	@drinks = Drink.new(:drink_type => params[:drink_type], :price => params[:price])
 	@drinks.save
 	redirect('/list')
 end
