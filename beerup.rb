@@ -12,12 +12,17 @@ DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/beerup.db")
 class Drink
 
 	include DataMapper::Resource
+#	include Paperclip::Resource
 	
 	property :id,        		Serial  
 	property :drink_type,		String,		:unique => true, :required => true
 	property :price,			Integer
 	
-	has n, :orders#, 'Order', :child_key => [:order_id]
+#	has_attached_file :file,
+#					  :url => "C:\Ruby22\lib\ruby\gems\2.2.0\gems\paperclip-4.3.6"
+#					  :path => "#{APP_ROOT}/public/system/:attachment/:id/:style/:basename.:extension"
+					  
+	has n, :orders
 	
 end
 
@@ -28,8 +33,9 @@ class Order
 	property :id,        		Serial  
 	property :delivered,		Boolean, 	 :default => false
 	property :tablenr,			Integer
+	property :antalld,			Integer
 	
-	belongs_to :drink#,			:required => false
+	belongs_to :drink
 	
 end
 
@@ -59,10 +65,11 @@ end
 post '/order_do' do
 	@order = Order.all()
 	tablenr = params[:tablenr]
+	antalld = params[:antalld]
 	drinks_id = params[:drinkorder]
 	drinks = Drink.get(drinks_id)
-	Kernel.puts "invoked create with #{params[:tablenr]}"
-	@order = Order.new(:tablenr => params[:tablenr], :delivered => false, :drink_id => drinks_id)
+	Kernel.puts "invoked create with #{params[:tablenr]} and #{params[:antalld]}"
+	@order = Order.new(:tablenr => params[:tablenr], :delivered => false, :drink_id => drinks_id, :antalld => antalld)
 	@order.save
 	#drinks = Drink.get(params[:id]).drink_type
 	#table = Order.get(params[:id])
@@ -82,8 +89,16 @@ post '/create' do
 	price = params[:price]
 	Kernel.puts "invoked create with #{params[:drink_type]}"
 	@drinks = Drink.new(:drink_type => params[:drink_type], :price => params[:price])
+	#if 
 	@drinks.save
-	redirect('/list')
+		#path = File.join(Dir.pwd, "/public/drinks", @drink.filename)
+		#File.open('/public/drinks' + params['imagefile'][:filename], "w") do |f|
+		#	f.write(params['imagefile'][:tempfile].read)
+		#end
+		#Kernel.puts "juuuhuuuu"
+	#else
+		redirect('/list')
+	#end
 end
 
 get '/list' do
@@ -119,4 +134,19 @@ get '/done' do
 	@title = "Order complete"
 	#erb :done
 end
+
+
+post '/upload' do
+	resource = Resource.new(:file => make_paperclip_mash(params[:file]))
+	halt "There were some errors processing your request..." unless resource.save
+end
+
+#def make_paperclip_mash(file_hash)
+ # mash = Mash.new
+ # mash['tempfile'] = file_hash[:tempfile]
+ # mash['filename'] = file_hash[:filename]
+ # mash['content_type'] = file_hash[:type]
+ # mash['size'] = file_hash[:tempfile].size
+ # mash
+#end
 	

@@ -4,6 +4,7 @@
 <% @drinks.each_with_index do |drinks,i| %>
 	<tr<%= ' class="alt"' if i%2==0 %>>
 	  <td><%= drinks.drink_type %></td><td><%= drinks.price %> kr</td>
+	 
 <% end %>
 
 </table>
