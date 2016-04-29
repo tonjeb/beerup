@@ -12,15 +12,10 @@ DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/beerup.db")
 class Drink
 
 	include DataMapper::Resource
-#	include Paperclip::Resource
 	
 	property :id,        		Serial  
 	property :drink_type,		String,		:unique => true, :required => true
 	property :price,			Integer
-	
-#	has_attached_file :file,
-#					  :url => "C:\Ruby22\lib\ruby\gems\2.2.0\gems\paperclip-4.3.6"
-#					  :path => "#{APP_ROOT}/public/system/:attachment/:id/:style/:basename.:extension"
 					  
 	has n, :orders
 	
@@ -63,17 +58,29 @@ get '/form' do
 end
 
 post '/order_do' do
-	@order = Order.all()
 	tablenr = params[:tablenr]
-	antalld = params[:antalld]
-	drinks_id = params[:drinkorder]
-	drinks = Drink.get(drinks_id)
-	Kernel.puts "invoked create with #{params[:tablenr]} and #{params[:antalld]}"
-	@order = Order.new(:tablenr => params[:tablenr], :delivered => false, :drink_id => drinks_id, :antalld => antalld)
-	@order.save
+	$i = 0
+	params["drinkorder"].each do |drink|
+		puts "vil ha #{params[:antalld][$i]} av #{drink}"
+	
+		antalld = params[:antalld][$i]
+		drinks_id = drink
+		drinks = Drink.get(drinks_id)
+		Kernel.puts "invoked create with #{params[:tablenr]} and #{params[:antalld]}"
+		@order = Order.new(:tablenr => params[:tablenr], :delivered => false, :drink_id => drinks_id, :antalld => antalld)
+		@order.save
+		
+		$i += 1
+	
+	end
+	
+	
+	
 	#drinks = Drink.get(params[:id]).drink_type
 	#table = Order.get(params[:id])
 	#"1 #{drinks} ordered to table #{tablenr}"
+	
+	
 	redirect('/done')
 end
 
@@ -89,16 +96,12 @@ post '/create' do
 	price = params[:price]
 	Kernel.puts "invoked create with #{params[:drink_type]}"
 	@drinks = Drink.new(:drink_type => params[:drink_type], :price => params[:price])
-	#if 
 	@drinks.save
-		#path = File.join(Dir.pwd, "/public/drinks", @drink.filename)
-		#File.open('/public/drinks' + params['imagefile'][:filename], "w") do |f|
-		#	f.write(params['imagefile'][:tempfile].read)
-		#end
-		#Kernel.puts "juuuhuuuu"
-	#else
-		redirect('/list')
-	#end
+		path = File.join(Dir.pwd, "/public/drinks", params['imagefile'][:filename])
+		File.open(path, "wb") do |f|
+			f.write(params['imagefile'][:tempfile].read)
+			redirect('/list')
+		end
 end
 
 get '/list' do
@@ -137,16 +140,10 @@ end
 
 
 post '/upload' do
-	resource = Resource.new(:file => make_paperclip_mash(params[:file]))
+	resource = Resource.new(:imagefile => make_paperclip_mash(params[:file]))
 	halt "There were some errors processing your request..." unless resource.save
 end
 
-#def make_paperclip_mash(file_hash)
- # mash = Mash.new
- # mash['tempfile'] = file_hash[:tempfile]
- # mash['filename'] = file_hash[:filename]
- # mash['content_type'] = file_hash[:type]
- # mash['size'] = file_hash[:tempfile].size
- # mash
-#end
+
+
 	

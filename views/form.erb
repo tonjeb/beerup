@@ -11,8 +11,8 @@
 		<p>
 			<% @drinks.each_with_index do |drinks,i| %>
 				<tr<%= ' class="alt"' if i%2==0 %>>
-				<td><input type="radio" name="drinkorder" id="drinkorder" value="<%= drinks.id %>"><%= drinks.drink_type %> - <%= drinks.price %> kr </td>
-				<td><input type="number" name="antalld" id="antalld" min="0" max="14" step="1"/></td><br>
+				<td><input type="checkbox" name="drinkorder[]" id="drinkorder" value="<%= drinks.id %>"><%= drinks.drink_type %> - <%= drinks.price %> kr </td>
+				<td><input type="number" name="antalld[]" id="antalld" min="0" max="14" step="1"/></td><br>
 			<% end %>
 		</p>
 	
