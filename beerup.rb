@@ -29,6 +29,7 @@ class Order
 	property :delivered,		Boolean, 	 :default => false
 	property :tablenr,			Integer
 	property :antalld,			Integer
+	property :pay,				Boolean,	 :default => false
 	
 	belongs_to :drink
 	
@@ -50,6 +51,12 @@ get '/' do
   erb :welcome
 end
 
+get '/admin' do
+	require_admin
+	@title = "Welcome to the Beerup admin page"
+	erb :admin
+end
+
 get '/form' do
 	@title = "Beer ordering"
 	@drinks = Drink.all()
@@ -66,8 +73,8 @@ post '/order_do' do
 		antalld = params[:antalld][$i]
 		drinks_id = drink
 		drinks = Drink.get(drinks_id)
-		Kernel.puts "invoked create with #{params[:tablenr]} and #{params[:antalld]}"
-		@order = Order.new(:tablenr => params[:tablenr], :delivered => false, :drink_id => drinks_id, :antalld => antalld)
+		Kernel.puts "invoked create with #{params[:pay]} and #{params[:antalld]}"
+		@order = Order.new(:tablenr => params[:tablenr], :delivered => false, :drink_id => drinks_id, :antalld => antalld, :pay => true)
 		@order.save
 		
 		$i += 1
@@ -143,7 +150,6 @@ post '/upload' do
 	resource = Resource.new(:imagefile => make_paperclip_mash(params[:file]))
 	halt "There were some errors processing your request..." unless resource.save
 end
-
 
 
 	

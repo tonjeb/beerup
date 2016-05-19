@@ -1,10 +1,9 @@
 <h2><%= @title %></h2>
-
 <form action="/order_do" method="post" enctype="multipart/form-data">
 	<fieldset>
 	<legend>Ordering</legend>
 		<p>
-			<label>Tablenr:</label><br	/> 
+			<label>Tablenr:</label><br> 
 			<input type="number" name="tablenr" id="tablenr" min="0" max="13" step="1"/>
 		</p>
 
@@ -14,6 +13,11 @@
 				<td><input type="checkbox" name="drinkorder[]" id="drinkorder" value="<%= drinks.id %>"><%= drinks.drink_type %> - <%= drinks.price %> kr </td>
 				<td><input type="number" name="antalld[]" id="antalld" min="0" max="14" step="1"/></td><br>
 			<% end %>
+		</p>
+		
+		<p>
+			<label>Want to pay by cash?</label><br>
+			<input type="checkbox" name="pay" id="pay" value="1"> Cash is king
 		</p>
 	
 		<p>

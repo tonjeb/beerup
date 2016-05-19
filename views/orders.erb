@@ -10,12 +10,14 @@
 			<th>Table</th>
 			<th>Drink type</th>
 			<th>Amount</th>
+			<th>Cash?</th>
 			<th>Delivered</th>
 		</tr>
 		<tr>
 			<td><%= orders.tablenr %></td>
 			<td><%= orders.drink.drink_type %></td>
 			<td><%= orders.antalld %></td>
+			<td><%= orders.pay %></td>
 			<td><a href="delivering?orderid=<%= orders.id %>">x</a></td>
 		</tr>
 	<% end %>
