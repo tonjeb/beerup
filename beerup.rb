@@ -57,6 +57,11 @@ get '/admin' do
 	erb :admin
 end
 
+get '/detailed' do
+	@title = "Steps to make a 3D model"
+	erb :detailed
+end
+
 get '/form' do
 	@title = "Beer ordering"
 	@drinks = Drink.all()
@@ -95,6 +100,12 @@ get '/new' do
 	require_admin
 	@title = "Add new drink type"
 	erb :new
+end
+
+get '/display' do
+	require_admin
+	@title = "Photos of each available drink"
+	erb :display
 end
 
 post '/create' do
@@ -136,7 +147,9 @@ end
 get '/leaderboard' do
 	@title = "Leaderboard"
 	@orders = Order.all()
+	tablenr = params[:tablenr]
 	#finne ut hvilket table som har bestilt mest drikke
+	int temp = orders.tablenr
 	erb :leaderboard
 end
 
