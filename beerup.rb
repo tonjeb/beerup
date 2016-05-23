@@ -71,19 +71,15 @@ end
 
 post '/order_do' do
 	tablenr = params[:tablenr]
-	$i = 0
+	Kernel.puts "Drinkorder: #{params[:drinkorder]}, antalld: #{params[:antalld]}"
 	params["drinkorder"].each do |drink|
-		puts "vil ha #{params[:antalld][$i]} av #{drink}"
-	
-		antalld = params[:antalld][$i]
-		drinks_id = drink
-		drinks = Drink.get(drinks_id)
-		Kernel.puts "invoked create with #{params[:pay]} and #{params[:antalld]}"
-		@order = Order.new(:tablenr => params[:tablenr], :delivered => false, :drink_id => drinks_id, :antalld => antalld, :pay => true)
+		
+		antalld = params["antall_#{drink}"]		
+		drinks = Drink.get(drink)
+		Kernel.puts "Bestilte: #{antalld} #{drinks.drink_type}"
+		@order = Order.new(:tablenr => params[:tablenr], :delivered => false, :drink_id => drink, :antalld => antalld) #:pay=> ...
 		@order.save
 		
-		$i += 1
-	
 	end
 	
 	
@@ -148,13 +144,14 @@ get '/leaderboard' do
 	@title = "Leaderboard"
 	@orders = Order.all()
 	tablenr = params[:tablenr]
-	#finne ut hvilket table som har bestilt mest drikke
+	#TODO: finne ut hvilket table som har bestilt mest drikke
 	int temp = orders.tablenr
 	erb :leaderboard
 end
 
 get '/done' do
 	@title = "Order complete"
+	#TODO: regne ut prisen og tiden det vil ta
 	#erb :done
 end
 

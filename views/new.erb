@@ -3,11 +3,11 @@
 <form action="/create" method="post" id="dink" enctype="multipart/form-data">
 	<p>
 		<label>Drink:</label><br	/>
-		<input type="text" name="drink_type" id="drink_type"	/>
+		<input type="text" name="drink_type" id="drink_type"	required/>
 	</p>
 	<p>
 		<label>Price in NOK:</label><br	/>
-		<input type="number" name="price" id="price" min="1" max="200" step="1"/>
+		<input type="number" name="price" id="price" min="0" max="200" step="1" required/>
 	</p>
 	<p>
 		<label>Image:</label><br	/>
