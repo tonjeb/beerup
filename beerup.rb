@@ -66,21 +66,28 @@ get '/form' do
 	@title = "Beer ordering"
 	@drinks = Drink.all()
 	@order = Order.all()
+
 	erb :form 
 end
 
 post '/order_do' do
-	tablenr = params[:tablenr]
-	Kernel.puts "Drinkorder: #{params[:drinkorder]}, antalld: #{params[:antalld]}"
-	params["drinkorder"].each do |drink|
-		
-		antalld = params["antall_#{drink}"]		
-		drinks = Drink.get(drink)
-		Kernel.puts "Bestilte: #{antalld} #{drinks.drink_type}"
-		@order = Order.new(:tablenr => params[:tablenr], :delivered => false, :drink_id => drink, :antalld => antalld) #:pay=> ...
-		@order.save
-		
+	a = 1
+	if (defined?(b)).nil?  #check if there is any input
+		redirect '/form'   #in case of no input, refresh order page
+		Kernel.puts "No input"
+	else
+		tablenr = params[:tablenr]
+		Kernel.puts "Drinkorder: #{params[:drinkorder]}, antalld: #{params[:antalld]}"
+		Kernel.puts "ok" 
+		params["drinkorder"].each do |drink|
+			antalld = params["antall_#{drink}"]		
+			drinks = Drink.get(drink)
+			Kernel.puts "Bestilte: #{antalld} #{drinks.drink_type}"
+			@order = Order.new(:tablenr => params[:tablenr], :delivered => false, :drink_id => drink, :antalld => antalld) #:pay=> ...
+			@order.save
 	end
+		
+end
 	
 	
 	

@@ -11,7 +11,8 @@
 			<% @drinks.each_with_index do |drinks,i| %>
 				<tr<%= ' class="alt"' if i%2==0 %>>
 				<div class="checkbox-group required"><td><input type="checkbox" name="drinkorder[]" id="drinkorder" value="<%= drinks.id %>"><%= drinks.drink_type %> - <%= drinks.price %> kr </td>
-				<td><input type="number" name="antall_<%= drinks.id %>" id="antalld" min="1" max="18" step="1"/></td><br></div>
+				<td><input type="number" name="antall_<%= drinks.id %>" id="antalld" min="1" max="18" step="1" /></td><br></div>
+			
 			<% end %>
 		</p>
 		
