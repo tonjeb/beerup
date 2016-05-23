@@ -39,6 +39,17 @@ DataMapper.auto_upgrade!
 
 helpers do
 	include Sinatra::Authorization
+	
+	def form_error(message)
+		@title = "Beer ordering"
+		@drinks = Drink.all()
+		@order = Order.all()
+		@error = message
+		
+		Kernel.puts "error was #{message}"
+		
+		erb :form
+	end
 end
 
 # set utf-8 for outgoing
@@ -71,33 +82,45 @@ get '/form' do
 end
 
 post '/order_do' do
-	a = 1
-	if (defined?(b)).nil?  #check if there is any input
-		redirect '/form'   #in case of no input, refresh order page
-		Kernel.puts "No input"
+	tablenr = params[:tablenr]
+	Kernel.puts "Drinkorder: #{params[:drinkorder]}, antalld: #{params[:antalld]}"
+	Kernel.puts "ok" 
+	if (params[:drinkorder].nil?)
+		form_error("Error: Form cannot be empty")
+		#redirect('/form')
 	else
-		tablenr = params[:tablenr]
-		Kernel.puts "Drinkorder: #{params[:drinkorder]}, antalld: #{params[:antalld]}"
-		Kernel.puts "ok" 
+		# Loop through all orders once to check for errors
+		order_error = false
 		params["drinkorder"].each do |drink|
-			antalld = params["antall_#{drink}"]		
 			drinks = Drink.get(drink)
-			Kernel.puts "Bestilte: #{antalld} #{drinks.drink_type}"
-			@order = Order.new(:tablenr => params[:tablenr], :delivered => false, :drink_id => drink, :antalld => antalld) #:pay=> ...
-			@order.save
-	end
+			antalld = params["antall_#{drink}"]		
+			if(antalld.nil? || antalld.empty?)
+				order_error = true
+				Kernel.puts "Error: Amount of #{drinks.drink_type} is blank"
+			end
+		end
 		
+		# Loop through to save orders
+		if(order_error == false)
+			params["drinkorder"].each do |drink|
+				drinks = Drink.get(drink)
+				antalld = params["antall_#{drink}"]		
+						
+				Kernel.puts "Bestilte: #{antalld} #{drinks.drink_type}"
+				@order = Order.new(:tablenr => params[:tablenr], :delivered => false, :drink_id => drink, :antalld => antalld, :pay=> (params[:pay] == "1"))
+				@order.save
+			end
+			redirect('/done')
+		else
+			form_error("Error: Missing amount")
+		end
+		
+	end
 end
 	
-	
-	
-	#drinks = Drink.get(params[:id]).drink_type
+
 	#table = Order.get(params[:id])
 	#"1 #{drinks} ordered to table #{tablenr}"
-	
-	
-	redirect('/done')
-end
 
 get '/new' do
 	require_admin
