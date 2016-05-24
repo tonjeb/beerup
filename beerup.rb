@@ -30,6 +30,7 @@ class Order
 	property :tablenr,			Integer
 	property :antalld,			Integer
 	property :pay,				Boolean,	 :default => false
+	property :total_price,		Integer
 	
 	belongs_to :drink
 	
@@ -84,7 +85,8 @@ end
 post '/order_do' do
 	tablenr = params[:tablenr]
 	Kernel.puts "Drinkorder: #{params[:drinkorder]}, antalld: #{params[:antalld]}"
-	Kernel.puts "ok" 
+	$tot_price = 0
+	
 	if (params[:drinkorder].nil?)
 		form_error("Error: Form cannot be empty")
 		#redirect('/form')
@@ -104,11 +106,13 @@ post '/order_do' do
 		if(order_error == false)
 			params["drinkorder"].each do |drink|
 				drinks = Drink.get(drink)
-				antalld = params["antall_#{drink}"]		
+				antalld = params["antall_#{drink}"]	
+				$tot_price += (drinks.price * antalld.to_i)	
 						
 				Kernel.puts "Bestilte: #{antalld} #{drinks.drink_type}"
-				@order = Order.new(:tablenr => params[:tablenr], :delivered => false, :drink_id => drink, :antalld => antalld, :pay=> (params[:pay] == "1"))
+				@order = Order.new(:tablenr => params[:tablenr], :delivered => false, :drink_id => drink, :antalld => antalld, :pay=> (params[:pay] == "1"), :total_price => $tot_price)
 				@order.save
+				@ordered = "Your order costs  tot_price and you chose to pay by cash/card"
 			end
 			redirect('/done')
 		else
@@ -167,7 +171,6 @@ get '/delivering' do
 	@order.update(:delivered => true)
 	@order.save
 	Kernel.puts "Dette er bestilling nr #{drikkeid}"
-	redirect('/orders')
 end
 
 get '/leaderboard' do
@@ -181,8 +184,14 @@ end
 
 get '/done' do
 	@title = "Order complete"
-	#TODO: regne ut prisen og tiden det vil ta
-	#erb :done
+	orders = Order.last()
+	Kernel.puts orders.inspect
+	@lastorder = orders
+	@price = orders.total_price
+	
+	# Estimated time before delivering drink order: sat to 3 minutes per drink
+	@time = (Order.count(:delivered => false) * 3)
+	erb :done
 end
 
 
