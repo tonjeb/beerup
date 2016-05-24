@@ -112,7 +112,6 @@ post '/order_do' do
 				Kernel.puts "Bestilte: #{antalld} #{drinks.drink_type}"
 				@order = Order.new(:tablenr => params[:tablenr], :delivered => false, :drink_id => drink, :antalld => antalld, :pay=> (params[:pay] == "1"), :total_price => $tot_price)
 				@order.save
-				@ordered = "Your order costs  tot_price and you chose to pay by cash/card"
 			end
 			redirect('/done')
 		else
