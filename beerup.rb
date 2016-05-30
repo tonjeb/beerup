@@ -170,8 +170,6 @@ end
 
 get '/leaderboard' do
 	@title = "Leaderboard"
-	#@orders = Order.all()
-	#tablenr = params[:tablenr]
 	#tst = Order.all(:fields => [:tablenr] :all.count)
 	#tst = DataMapper.repository(:default).adapter.select('SELECT tablenr, SUM(total_price) AS total_price FROM orders WHERE delivered = "t" GROUP BY tablenr ORDER BY total_price DESC')
 	orders = Order.aggregate(:tablenr, :total_price.sum, :delivered => true, :order => [ :total_price.desc ])
