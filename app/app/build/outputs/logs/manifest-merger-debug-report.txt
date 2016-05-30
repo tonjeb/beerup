@@ -1,0 +1,193 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:2:1-99:16
+	android:theme
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:5:5-52
+	xmlns:android
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:2:11-69
+	package
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:3:5-33
+		INJECTED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml
+	android:versionName
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:7:5-30
+		INJECTED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml
+	android:versionCode
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:6:5-28
+		INJECTED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml
+	android:installLocation
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:4:5-35
+uses-sdk
+ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:9:5-11:41
+	android:targetSdkVersion
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:11:9-38
+		INJECTED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:10:9-35
+		INJECTED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml
+uses-feature#android.hardware.camera
+ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:13:5-60
+	android:name
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:13:19-57
+supports-screens
+ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:15:5-20:40
+	android:largeScreens
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:17:9-36
+	android:anyDensity
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:16:9-34
+	android:normalScreens
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:18:9-37
+	android:xlargeScreens
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:20:9-37
+	android:smallScreens
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:19:9-36
+uses-permission#android.permission.INTERNET
+ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:22:5-67
+	android:name
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:22:22-64
+uses-permission#android.permission.CAMERA
+ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:23:5-65
+	android:name
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:23:22-62
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:24:5-79
+	android:name
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:24:22-76
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:25:5-81
+	android:name
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:25:22-78
+uses-feature#0x00020000
+ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:27:5-54
+	android:glEsVersion
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:27:19-51
+uses-feature#android.hardware.camera.autofocus
+ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:28:5-30:36
+	android:required
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:30:9-33
+	android:name
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:29:9-57
+uses-feature#android.hardware.camera.front
+ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:31:5-33:36
+	android:required
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:33:9-33
+	android:name
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:32:9-53
+uses-feature#android.hardware.touchscreen
+ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:34:5-36:36
+	android:required
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:36:9-33
+	android:name
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:35:9-52
+uses-feature#android.hardware.touchscreen.multitouch
+ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:37:5-39:36
+	android:required
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:39:9-33
+	android:name
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:38:9-63
+uses-feature#android.hardware.touchscreen.multitouch.distinct
+ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:40:5-42:36
+	android:required
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:42:9-33
+	android:name
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:41:9-72
+android:uses-permission#android.permission.READ_PHONE_STATE
+ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:44:5-83
+	android:name
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:44:30-80
+android:uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:45:5-88
+	android:name
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:45:30-85
+application
+ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:47:5-97:19
+	android:label
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:49:9-41
+	android:icon
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:48:9-42
+	android:theme
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:50:9-67
+activity#com.gotonje.beerup.UnityPlayerNativeActivity
+ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:51:9-68:20
+	android:screenOrientation
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:56:13-51
+	android:label
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:54:13-45
+	android:configChanges
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:53:13-170
+	android:name
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:52:13-54
+	android:launchMode
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:55:13-44
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:57:13-60:29
+action#android.intent.action.MAIN
+ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:58:17-69
+	android:name
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:58:25-66
+category#android.intent.category.LAUNCHER
+ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:59:17-77
+	android:name
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:59:27-74
+meta-data#unityplayer.UnityActivity
+ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:62:13-64:40
+	android:name
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:63:17-57
+	android:value
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:64:17-37
+meta-data#unityplayer.ForwardNativeEventsToDalvik
+ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:65:13-67:41
+	android:name
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:66:17-71
+	android:value
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:67:17-38
+activity#com.unity3d.player.VideoPlayer
+ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:69:9-73:61
+	android:screenOrientation
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:73:13-49
+	android:label
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:72:13-45
+	android:configChanges
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:71:13-170
+	android:name
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:70:13-58
+uses-library#com.ti.s3d
+ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:79:9-81:40
+	android:required
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:81:13-37
+	android:name
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:80:13-38
+uses-library#com.osterhoutgroup.api.ext
+ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:83:9-85:40
+	android:required
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:85:13-37
+	android:name
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:84:13-54
+activity#com.gotonje.beerup.MainActivity
+ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:87:9-96:20
+	android:name
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:87:19-47
+intent-filter#android.intent.action.MAIN+android.intent.action.VIEW+android.intent.category.BROWSABLE+android.intent.category.DEFAULT+android.intent.category.LAUNCHER
+ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:88:13-95:29
+data
+ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:89:17-69
+	android:host
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:89:47-66
+	android:scheme
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:89:23-46
+action#android.intent.action.VIEW
+ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:91:17-69
+	android:name
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:91:25-66
+category#android.intent.category.DEFAULT
+ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:93:17-76
+	android:name
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:93:27-73
+category#android.intent.category.BROWSABLE
+ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:94:17-77
+	android:name
+		ADDED from C:\Users\Tonje\beerup\app\app\src\main\AndroidManifest.xml:94:27-75
