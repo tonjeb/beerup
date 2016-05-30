@@ -108,22 +108,18 @@ post '/order_do' do
 				drinks = Drink.get(drink)
 				antalld = params["antall_#{drink}"]	
 				$tot_price += (drinks.price * antalld.to_i)	
-						
+				$price = (drinks.price * antalld.to_i)	
 				Kernel.puts "Bestilte: #{antalld} #{drinks.drink_type}"
-				@order = Order.new(:tablenr => params[:tablenr], :delivered => false, :drink_id => drink, :antalld => antalld, :pay=> (params[:pay] == "1"), :total_price => $tot_price)
+				@order = Order.new(:tablenr => params[:tablenr], :delivered => false, :drink_id => drink, :antalld => antalld, :pay=> (params[:pay] == "1"), :total_price => $price)
 				@order.save
 			end
-			redirect('/done')
+			redirect("/done?price=#{$tot_price}")
 		else
 			form_error("Error: Missing amount")
 		end
 		
 	end
 end
-	
-
-	#table = Order.get(params[:id])
-	#"1 #{drinks} ordered to table #{tablenr}"
 
 get '/new' do
 	require_admin
@@ -174,19 +170,27 @@ end
 
 get '/leaderboard' do
 	@title = "Leaderboard"
-	@orders = Order.all()
-	tablenr = params[:tablenr]
-	#TODO: finne ut hvilket table som har bestilt mest drikke
-	int temp = orders.tablenr
+	#@orders = Order.all()
+	#tablenr = params[:tablenr]
+	#tst = Order.all(:fields => [:tablenr] :all.count)
+	#tst = DataMapper.repository(:default).adapter.select('SELECT tablenr, SUM(total_price) AS total_price FROM orders WHERE delivered = "t" GROUP BY tablenr ORDER BY total_price DESC')
+	orders = Order.aggregate(:tablenr, :total_price.sum, :delivered => true, :order => [ :total_price.desc ])
+	@list = orders
+	Kernel.puts orders.inspect
+	#tst.each do |table|
+	#	Kernel.puts "test"
+		#table.total_price
+	#end
 	erb :leaderboard
 end
 
 get '/done' do
 	@title = "Order complete"
-	orders = Order.last()
-	Kernel.puts orders.inspect
-	@lastorder = orders
-	@price = orders.total_price
+	#orders = Order.last()
+	#Kernel.puts orders.inspect
+	@lastorder = Order.last()
+	#@price = orders.total_price
+	@price = params[:price]
 	
 	# Estimated time before delivering drink order: sat to 3 minutes per drink
 	@time = (Order.count(:delivered => false) * 3)
