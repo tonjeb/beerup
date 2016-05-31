@@ -65,7 +65,7 @@ end
 
 get '/admin' do
 	require_admin
-	@title = "Welcome to the Beerup admin page"
+	@title = "Admin page"
 	erb :admin
 end
 
