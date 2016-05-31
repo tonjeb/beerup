@@ -134,7 +134,6 @@ get '/display/:id' do
 	@title = "Display drink"
 	idin = params[:id]
 	@id = idin
-	#Kernel.puts id
 	erb :display
 end
 
