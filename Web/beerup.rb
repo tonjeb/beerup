@@ -6,7 +6,6 @@ require 'dm-migrations'
 require 'dm-validations'
 require_relative 'lib/authorization'
 require 'dm-timestamps'
-require 'timeywimey'
 
 DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/beerup.db")
 
