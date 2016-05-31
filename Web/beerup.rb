@@ -5,7 +5,7 @@ require 'dm-core'
 require 'dm-migrations'
 require 'dm-validations'
 require_relative 'lib/authorization'
-#require 'leaderboard'
+require 'dm-timestamps'
 
 DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/beerup.db")
 
@@ -31,6 +31,7 @@ class Order
 	property :antalld,			Integer
 	property :pay,				Boolean,	 :default => false
 	property :total_price,		Integer
+	property :created_at,		DateTime
 	
 	belongs_to :drink
 	
@@ -140,17 +141,41 @@ post '/create' do
 	Kernel.puts "invoked create with #{params[:drink_type]}"
 	@drinks = Drink.new(:drink_type => params[:drink_type], :price => params[:price])
 	@drinks.save
-		path = File.join(Dir.pwd, "/public/drinks", params['imagefile'][:filename])
-		File.open(path, "wb") do |f|
-			f.write(params['imagefile'][:tempfile].read)
-			redirect('/list')
-		end
+	path = File.join(Dir.pwd, "/public/drinks", @drinks.id.to_s) #params['imagefile'][:filename]
+	File.open(path, "wb") do |f|
+		f.write(params['imagefile'][:tempfile].read)
+		redirect('/deletedrinks')
+	end
+end
+
+get '/deletedrink/:id' do
+	require_admin
+	id = params[:id]
+	drink = Drink.get(id)
+	unless drink.nil?
+		path = File.join(Dir.pwd, "/public/drinks", drink.id.to_s)
+		File.delete(path)
+		drink.destroy
+	end
+	redirect('/deletedrinks')
+end
+
+get '/delete_order/:id' do
+	require_admin
+	
 end
 
 get '/list' do
 	@title = "All drink types"
 	@drinks = Drink.all()
 	erb :list
+end
+
+get '/deletedrinks' do
+	require_admin
+	@title = "Delete drink"
+	@drinks = Drink.all()
+	erb :deletedrinks
 end
 
 get '/orders' do
@@ -172,7 +197,7 @@ get '/leaderboard' do
 	@title = "Leaderboard"
 	#tst = Order.all(:fields => [:tablenr] :all.count)
 	#tst = DataMapper.repository(:default).adapter.select('SELECT tablenr, SUM(total_price) AS total_price FROM orders WHERE delivered = "t" GROUP BY tablenr ORDER BY total_price DESC')
-	orders = Order.aggregate(:tablenr, :total_price.sum, :delivered => true, :order => [ :total_price.desc ])
+	orders = Order.aggregate(:tablenr, :total_price.sum, :delivered => true, :created_at => [ :lte => 4.hours.ago ], :order => [ :total_price.desc ])
 	@list = orders
 	Kernel.puts orders.inspect
 	#tst.each do |table|
@@ -200,6 +225,3 @@ post '/upload' do
 	resource = Resource.new(:imagefile => make_paperclip_mash(params[:file]))
 	halt "There were some errors processing your request..." unless resource.save
 end
-
-
-	
