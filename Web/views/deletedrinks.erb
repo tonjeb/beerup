@@ -1,10 +1,52 @@
-<h2><%= @title %></h2>
+<head>
+	<style>
+        .list{
+            font-family: Open Sans, sans-serif;
+            font-weight: 300;
+            font-size: small;
+        }
+        
+        p{
+            margin-right: 30px;
+        }
+    
+		#deletedrinks{
+            display: block;
+            width: 50%;
+            float: left;
+            color: white;
+            background-color: #358C35;
+            padding-left: 2%;
+            padding-right: 1%;
+            margin-top: 5%;
+            margin-left: 5%;
+	}
+    
+    	a{
+            color: #ffffff;
+            font-family: Open Sans, sans-serif;
+            font-size: small;
+        }
+    
 
-<table border="0" cellpadding="0" cellspacing="10" class="list">
-<% @drinks.each_with_index do |drinks,i| %>
-	<tr<%= ' class="alt"' if i%2==0 %>>
-	  <td><%= drinks.drink_type %></td><td><%= drinks.price %> kr</td><td><a href="/display/<%= drinks.id %>">Display drink</a></td><td><a href="/deletedrink/<%= drinks.id %>">Delete</a></td>
-	 </tr>
-<% end %>
+	</style>
+</head>
 
-</table>
+<body>
+	<p class="backto"><a href="/admin">Back to admin page</a></p>
+	
+	<div id=deletedrinks>
+		<h2><%= @title %></h2>
+	
+		<table class="list">
+            <% @drinks.each_with_index do |drinks,i| %>
+            <tr <%= ' class="alt"' if i%2==0 %> >
+            <td><p><%= drinks.drink_type %></p></td>
+            <td><p><%= drinks.price %> kr</p></td>
+            <td><p><a href="/display/<%= drinks.id %>">Display drink</p></a></td>
+            <td><p><a href="/deletedrink/<%= drinks.id %>">Delete</p></a></td>
+            </tr>
+            <% end %>
+        </table>
+            
+</body>
