@@ -1,36 +1,57 @@
-<h2><%= @title %></h2>
-<div id="Errors" style="background-color:red; font-weight:bold; font-size:1.5em;" >
-	<%= @error %>
-</div>
+<head>
+	<style>
+		#ordering{
+			display: block;
+			color: white;
+			width: 40%;
+			margin-top: 5%;
+			margin-left: 5%;
+			float: left;
+			background-color: #358C35;
+			padding-left: 2%;
+			padding-right: 1%;
+		}
 
-<form action="/order_do" method="post" enctype="multipart/form-data">
-	<fieldset>
-	<legend>Ordering</legend>
+	</style>
+</head>
+
+
+<body>
+	
+<div id="Errors">
+		<%= @error %>
+	</div>
+
+<p class="backto"><a href="/" >Back to main page</a></p>
+
+
+<div id="ordering">
+	<h2><%= @title %></h2>
+	<form action="/order_do" method="post" enctype="multipart/form-data">
+		
 		<p>
-			<label>Tablenr:</label><br> 
+			<label>Table number</label><br> 
 			<input type="number" name="tablenr" id="tablenr" min="1" max="20" step="1" required/>
 		</p>
-
+		
 		<p>
 			<% @drinks.each_with_index do |drinks,i| %>
-				<tr<%= ' class="alt"' if i%2==0 %>>
-				<td><input type="checkbox" name="drinkorder[]" id="drinkorder" value="<%= drinks.id %>"><%= drinks.drink_type %> - <%= drinks.price %> kr </td>
-				<td><input type="number" name="antall_<%= drinks.id %>" id="antalld" min="1" max="18" step="1" /></td><br>
-				
+			<tr<%= ' class="alt"' if i%2==0 %> >
+			<td><input type="checkbox" name="drinkorder[]" id="drinkorder" value="<%= drinks.id %>"><%= drinks.drink_type %> - <%= drinks.price %> kr </td>
+			<td><input type="number" name="antall_<%= drinks.id %>" id="antalld" min="1" max="18" step="1" /></td><br>
 			<% end %>
 		</p>
 		
- 		<p>
+		<p>
 			<label>Want to pay by cash?</label><br>
 			<input type="checkbox" name="pay" id="pay" value="1"> Cash is king
 		</p>
-	
+		
 		<p>
-			<input type="submit" value="Place order">
+			<input id="sendinn" type="submit" value="Place order">
 		</p>
-	 </fieldset>
-</form>
+	</form>
+</div>
 
-<a href="/">Back to main menu</a> 
-
-
+</body>
+		
