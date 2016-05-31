@@ -30,12 +30,6 @@
 			font-size: small;
 			}
 			
-			p{
-			font-family: Open Sans, sans-serif;
-			font-weight: 300;
-			font-size: medium;
-			}
-			
 			p a{
 				color: #e0e0e0;
 				text-decoration: none;
@@ -55,56 +49,58 @@
 
 	</style>
 </head>
-<div id="Errors" style="background-color:red; font-weight:bold; font-size:1.5em;" >
-	<%= @error %>
-</div>
+
 <body>
+	
+	<div id="Errors">
+		<%= @error %>
+	</div>
+	
 	<p class="backto"><a href="/admin" >Back to admin page</a></p>
 	
-<div id="addnew">
-
-	<h2><%= @title %></h2>
-
-	<form action="/create" method="post" id="drink" enctype="multipart/form-data">
-		<p
-			<label style="font-family: Open Sans, sans-serif; font-weight: 300; font-size: medium;">Drink name</label><br/>
+	<div id="addnew">
+		<h2><%= @title %></h2>
+		<form action="/create" method="post" id="drink" enctype="multipart/form-data">
+			
+		<p>
+			<label>Drink name</label><br>
 			<input type="text" size="25" name="drink_type" alt="Drink type" id="drink_type" required/>
 		</p>
+		
 		<p>
-			<label style="font-family: Open Sans, sans-serif; font-weight: 300; font-size: medium;">Price in NOK</label><br/>
+			<label>Price in NOK</label><br>
 			<input type="number" name="price" id="price" min="0" max="200" step="1" required/>
 		</p>
+		
 		<p>
-			<label style="font-family: Open Sans, sans-serif; font-weight: 300; font-size: medium;">Image</label><br/> 
-			<input type="file" name="imagefile" id="imagefile" />
+			<label>Image</label><br> 
+			<input type="file" name="imagefile" id="imagefile">
 		</p><br>
 
-				<input id="sendinn" type="submit" value="Upload">
-		<br><p>
+		<input id="sendinn" type="submit" value="Upload"><br>
+		
+		<p>
 		You can add a normal photo in the form above, or you can add a 3D-image in .obj format, and then make it appear as an augmented reality object in the BeerUp app. <br>
 		To do this, follow the steps listed to the right.
-			<p>
 
-	</p>
-</form>
-</div>
+		</form>
+	</div>
 
-<div id=guide>
-	<h2>How to make a 3D model</h2>
-
-	<p>1. Go to <a href="http://www.smoothie-3d.com/">Smoothie 3D</a> in your browser, and register if you haven't already. </p>
-	<p>2. Choose homepage and then "New Project". </p>
-	<p>3. Choose the “Image” tab, and “Add” to add an image to use as the background and pattern for your 3D-model. Choose an image of the drink that you are modeling. </p>
-	<p>4. The image will be added to the background, and will be a little darkened compared to the original image. </p>
-	<p>5. Choose the tool called “Mode to draw shapes by revolution”. The red line showing up in this mode should be placed on the middle of the drink. Drag and drop the line to get it aligned.  </p>
-	<p>6. Move the cursor to the right side of it, and start drawing by using your left mouse button. You’ll have to hold the button down while drawing the whole model. </p>
-	<p>7. When the drawing is finished, click “yes” to show the contour of the model.</p>
-	<p>8. You’ll then see some dots in the line you drawed, which can be dragged to adjust the outline of the model. </p>
-	<p>9. Place your cursor in the grey square in the top left corner, press down the left mouse button and move the cursor to rotate your model.</p>
-	<p>10. Save the model, choose “Exchange” and then “Export to OBJ”. </p>
-	<br><p>For more detailed description with pictures for each step, press <a href="/detailed">here</a>.</p>
+	<div id=guide>
+		<h2>How to make a 3D model</h2>
+		<p>1. Go to <a href="http://www.smoothie-3d.com/">Smoothie 3D</a> in your browser, and register if you haven't already. </p>
+		<p>2. Choose homepage and then "New Project". </p>
+		<p>3. Choose the “Image” tab, and “Add” to add an image to use as the background and pattern for your 3D-model. Choose an image of the drink that you are modeling. </p>
+		<p>4. The image will be added to the background, and will be a little darkened compared to the original image. </p>
+		<p>5. Choose the tool called “Mode to draw shapes by revolution”. The red line showing up in this mode should be placed on the middle of the drink. Drag and drop the line to get it aligned.  </p>
+		<p>6. Move the cursor to the right side of it, and start drawing by using your left mouse button. You’ll have to hold the button down while drawing the whole model. </p>
+		<p>7. When the drawing is finished, click “yes” to show the contour of the model.</p>
+		<p>8. You’ll then see some dots in the line you drawed, which can be dragged to adjust the outline of the model. </p>
+		<p>9. Place your cursor in the grey square in the top left corner, press down the left mouse button and move the cursor to rotate your model.</p>
+		<p>10. Save the model, choose “Exchange” and then “Export to OBJ”. </p><br>
+		<p>For more detailed description with pictures for each step, press <a href="/detailed">here</a>.</p>
 		
-</div>
+	</div>
 
 
 </body>
