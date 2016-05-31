@@ -1,12 +1,56 @@
-<h2><%= @title %></h2>
+<head>
+	<style>
+        .list{
+            font-family: Open Sans, sans-serif;
+            font-weight: 300;
+            font-size: small;
+        }
+        
+        p{
+            margin-right: 30px;
+        }
+    
+		#drinktypes{
+            display: block;
+            width: 50%;
+            float: left;
+            color: white;
+            background-color: #358C35;
+            padding-left: 2%;
+            padding-right: 1%;
+            margin-top: 5%;
+            margin-left: 5%;
+	}
+    
+    	a{
+            color: #ffffff;
+            font-family: Open Sans, sans-serif;
+            font-size: small;
+        }
+        
+        td{
+		width: 100px;
+	}
+    
 
-<table border="0" cellpadding="0" cellspacing="10" class="list">
+	</style>
+</head>
+<body>
+    	<p class="backto"><a href="/">Back to main page</a></p>
+    
+<div id="drinktypes">
+    <h2><%= @title %></h2>
+    
+<table class="list">
 <% @drinks.each_with_index do |drinks,i| %>
 	<tr<%= ' class="alt"' if i%2==0 %>>
-	  <td><%= drinks.drink_type %></td><td><%= drinks.price %> kr</td><td><a href="/display/<%= drinks.id %>">Display drink</a></td>
+	  <td><%= drinks.drink_type %></td><td><%= drinks.price %> kr</td>
+      <td><a href="/display/<%= drinks.id %>">Display drink</a></td>
 	 
 <% end %>
 
 </table>
 
-<a href="/">Back to main menu</a> 
+</div>
+
+</body>
