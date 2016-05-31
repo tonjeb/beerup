@@ -1,21 +1,43 @@
-<h2><%= @title %></h2>
-
 <head>
-<meta http-equiv="refresh" content="60">
+	<style>
+		.list{
+			font-family: Open Sans, sans-serif;
+			font-weight: 300;
+			font-size: small;
+		}
+		
+		#leaderboard{
+			display: block;
+			width: 50%;
+			float: left;
+			color: white;
+			background-color: #358C35;
+			padding-left: 2%;
+			padding-right: 1%;
+			margin-top: 5%;
+			margin-left: 5%;
+		}
+		
+		
+	</style>
+	<meta http-equiv="refresh" content="60">
 </head>
 
-<table border="0" cellpadding="0" cellspacing="10" class="leaderboard">
-<tr>
-	<th>Table</th>
-	<th>Points</th>
-</tr>
-<% @list.each_with_index do |orders,i| %>
-	<tr<%= ' class="alt"' if i%2==0 %>>
+<body>
+	<p class="backto"><a href="/" >Back to main page</a></p>
+	
+	<div id="leaderboard">
+		<h2><%= @title %></h2>
+		<table class="list">
+			<tr>
+				<th style="padding-right: 100px;">Table</th>
+				<th>Points</th>
+			</tr>
+		<% @list.each_with_index do |orders,i| %>
+		<tr<%= ' class="alt"' if i%2==0 %> >
 		<td><%= orders[0] %></td><td><%= orders[1] %></td>
-	</tr>
-<% end %>
-
-</table>
-
-
-<a href="/">Back to main menu</a>  
+		</tr>
+		<% end %>
+		</table>
+	</div>
+</body>
