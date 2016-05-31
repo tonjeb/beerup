@@ -22,7 +22,7 @@
 			<td><%= orders.antalld %></td>
 			<td><% if orders.pay %>Yes <% else %>No <% end %></td>
 			<td><a href="delivering?orderid=<%= orders.id %>">x</a></td>
-			<td><a href="delete_order<%= orders.id %>">x</a></td>
+			<td><a href="delete_order/<%= orders.id %>">x</a></td>
 		</tr>
 	<% end %>
 
