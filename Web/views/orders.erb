@@ -1,31 +1,77 @@
-<h2><%= @title %></h2>
 <head>
 <meta http-equiv="refresh" content="10">
+
+<style>
+	.list{
+		font-family: Open Sans, sans-serif;
+		font-weight: 300;
+		font-size: small;
+	}
+	
+	a{
+		color: #ffffff;
+		font-family: Open Sans, sans-serif;
+		font-size: small;
+		text-decoration: none;
+	}
+	a:hover{
+		text-decoration: underline;
+	}
+	
+	#guide{
+		display: block;
+		width: 50%;
+		float: left;
+		color: white;
+		background-color: #358C35;
+		padding-left: 2%;
+		padding-right: 1%;
+		margin-top: 5%;
+		margin-left: 5%;
+	}
+			
+	th{
+		width: 10%;
+	}
+			
+	.orders{
+		padding-bottom: 10%;
+		padding-left: 5%;
+	}
+
+</style>
+
 </head>
-<form action="/delivering" method="post" enctype="multipart/form-data">
-	<fieldset>
-	<legend>Manage orders</legend>
-	<table border="0" cellpadding="0" cellspacing="10" class="list">
+
+<body>
+	<p class="backto"><a href="/admin">Back to admin page</a></p>
+	
+
+	<div id=guide>
+		<form action="/delivering" method="post" enctype="multipart/form-data">
+	<h2><%= @title %></h2>
+	
+	<table  class="list">
 		<% @orders.each_with_index do |orders,i| %>
-		<tr<%= ' class="alt"' if i%2==0 %>>
-		<tr>
+		<tr <%= ' class="alt"' if i%2==0 %> >
 			<th>Table</th>
 			<th>Drink type</th>
 			<th>Amount</th>
 			<th>Cash?</th>
-			<th>Delivered</th>
+			<th>Delivered?</th>
 			<th>Delete</th>
 		</tr>
 		<tr>
-			<td><%= orders.tablenr %></td>
-			<td><%= orders.drink.drink_type %></td>
-			<td><%= orders.antalld %></td>
-			<td><% if orders.pay %>Yes <% else %>No <% end %></td>
-			<td><a href="delivering?orderid=<%= orders.id %>">x</a></td>
-			<td><a href="delete_order/<%= orders.id %>">x</a></td>
+			<td class="orders"><%= orders.tablenr %></td>
+			<td class="orders"><%= orders.drink.drink_type %></td>
+			<td class="orders"><%= orders.antalld %></td>
+			<td class="orders"><% if orders.pay %>Yes <% else %>No <% end %></td>
+			<td class="orders"><a href="delivering?orderid=<%= orders.id %>">x</a></td>
+			<td class="orders"><a href="delete_order/<%= orders.id %>">x</a></td>
 		</tr>
 	<% end %>
-
 	</table>
-	</fieldset>
-</form>
+</div>
+		</form>
+
+</body>
