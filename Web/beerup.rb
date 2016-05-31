@@ -6,6 +6,7 @@ require 'dm-migrations'
 require 'dm-validations'
 require_relative 'lib/authorization'
 require 'dm-timestamps'
+require 'timeywimey'
 
 DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/beerup.db")
 
@@ -52,6 +53,8 @@ helpers do
 		
 		erb :form
 	end
+	
+	
 end
 
 # set utf-8 for outgoing
@@ -162,6 +165,12 @@ end
 
 get '/delete_order/:id' do
 	require_admin
+	id = params[:id]
+	order = Order.get(id)
+	unless order.nil?
+		order.destroy
+	end
+	redirect('/orders')
 	
 end
 
@@ -196,15 +205,17 @@ end
 get '/leaderboard' do
 	@title = "Leaderboard"
 	#tst = Order.all(:fields => [:tablenr] :all.count)
+	timestamp = Time.now - 4.hours
+	Kernel.puts timestamp
 	#tst = DataMapper.repository(:default).adapter.select('SELECT tablenr, SUM(total_price) AS total_price FROM orders WHERE delivered = "t" GROUP BY tablenr ORDER BY total_price DESC')
-	orders = Order.aggregate(:tablenr, :total_price.sum, :delivered => true, :created_at => [ :lte => 4.hours.ago ], :order => [ :total_price.desc ])
-	@list = orders
+	orders = Order.aggregate(:tablenr, :total_price.sum, :delivered => true, :created_at => [ :lte => timestamp ], :order => [ :total_price.desc ])
+	#@list = orders
 	Kernel.puts orders.inspect
 	#tst.each do |table|
 	#	Kernel.puts "test"
 		#table.total_price
 	#end
-	erb :leaderboard
+	#erb :leaderboard
 end
 
 get '/done' do
