@@ -131,9 +131,11 @@ get '/new' do
 	erb :new
 end
 
-get '/display' do
-	require_admin
-	@title = "Photos of each available drink"
+get '/display/:id' do
+	@title = "Display drink"
+	idin = params[:id]
+	@id = idin
+	#Kernel.puts id
 	erb :display
 end
 
@@ -143,11 +145,16 @@ post '/create' do
 	price = params[:price]
 	Kernel.puts "invoked create with #{params[:drink_type]}"
 	@drinks = Drink.new(:drink_type => params[:drink_type], :price => params[:price])
-	@drinks.save
-	path = File.join(Dir.pwd, "/public/drinks", @drinks.id.to_s) #params['imagefile'][:filename]
-	File.open(path, "wb") do |f|
-		f.write(params['imagefile'][:tempfile].read)
-		redirect('/deletedrinks')
+	if @drinks.save
+		path = File.join(Dir.pwd, "/public/drinks", @drinks.id.to_s+".jpg") #params['imagefile'][:filename]
+		File.open(path, "wb") do |f|
+			f.write(params['imagefile'][:tempfile].read)
+			redirect('/deletedrinks')
+		end
+	
+	else
+		@error = "That drink already exists, please choose another name."
+		erb :new
 	end
 end
 
@@ -199,23 +206,23 @@ get '/delivering' do
 	@order = Order.get(drikkeid)
 	@order.update(:delivered => true)
 	@order.save
-	Kernel.puts "Dette er bestilling nr #{drikkeid}"
+	redirect('/orders')
 end
 
 get '/leaderboard' do
 	@title = "Leaderboard"
 	#tst = Order.all(:fields => [:tablenr] :all.count)
-	timestamp = Time.now - 4.hours
+	timestamp = Time.now - (4*60*60)
 	Kernel.puts timestamp
 	#tst = DataMapper.repository(:default).adapter.select('SELECT tablenr, SUM(total_price) AS total_price FROM orders WHERE delivered = "t" GROUP BY tablenr ORDER BY total_price DESC')
-	orders = Order.aggregate(:tablenr, :total_price.sum, :delivered => true, :created_at => [ :lte => timestamp ], :order => [ :total_price.desc ])
-	#@list = orders
+	orders = Order.aggregate(:tablenr, :total_price.sum, :delivered => true, :created_at.gte => timestamp, :order => [ :total_price.desc ])
+	@list = orders
 	Kernel.puts orders.inspect
 	#tst.each do |table|
 	#	Kernel.puts "test"
 		#table.total_price
 	#end
-	#erb :leaderboard
+	erb :leaderboard
 end
 
 get '/done' do
