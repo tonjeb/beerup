@@ -20,7 +20,7 @@
             padding-right: 1%;
             margin-top: 5%;
             margin-left: 5%;
-	}
+        }
     
     	a{
             color: #ffffff;
@@ -30,7 +30,12 @@
         
         td{
 		width: 100px;
-	}
+        }
+        
+        table
+        {
+            margin-bottom: 5%;
+        }
     
 
 	</style>
@@ -38,19 +43,17 @@
 <body>
     	<p class="backto"><a href="/">Back to main page</a></p>
     
-<div id="drinktypes">
-    <h2><%= @title %></h2>
+    <div id="drinktypes">
+        <h2><%= @title %></h2>
     
-<table class="list">
-<% @drinks.each_with_index do |drinks,i| %>
-	<tr<%= ' class="alt"' if i%2==0 %>>
-	  <td><%= drinks.drink_type %></td><td><%= drinks.price %> kr</td>
-      <td><a href="/display/<%= drinks.id %>">Display drink</a></td>
-	 
-<% end %>
+        <table class="list">
+            <% @drinks.each_with_index do |drinks,i| %>
+            <tr<%= ' class="alt"' if i%2==0 %>>
+            <td><%= drinks.drink_type %></td><td><%= drinks.price %> kr</td>
+            <td><a href="/display/<%= drinks.id %>">Display drink</a></td>
+            <% end %>
+        </table>
 
-</table>
-
-</div>
+    </div>
 
 </body>

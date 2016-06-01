@@ -35,7 +35,7 @@
 	}
 			
 	.orders{
-		padding-bottom: 10%;
+		padding-bottom: 3%;
 		padding-left: 5%;
 	}
 	
@@ -53,9 +53,7 @@
 		<form action="/delivering" method="post" enctype="multipart/form-data">
 	<h2><%= @title %></h2>
 	
-	<table  class="list">
-		<% @orders.each_with_index do |orders,i| %>
-		<tr <%= ' class="alt"' if i%2==0 %> >
+	<table  class="list">	
 			<th>Table</th>
 			<th>Drink type</th>
 			<th>Amount</th>
@@ -63,6 +61,8 @@
 			<th>Delivered?</th>
 			<th>Delete</th>
 		</tr>
+		<% @orders.each_with_index do |orders,i| %>
+		<tr <%= ' class="alt"' if i%2==0 %> >
 		<tr>
 			<td class="orders"><%= orders.tablenr %></td>
 			<td class="orders"><%= orders.drink.drink_type %></td>
