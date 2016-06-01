@@ -1,4 +1,46 @@
-<h2><%= @title %></h2>
+<head>
+	<style>
+		.list{
+			font-family: Open Sans, sans-serif;
+			font-weight: 300;
+			font-size: small;
+		}
+	
+		a{
+			color: #ffffff;
+			font-family: Open Sans, sans-serif;
+			font-size: small;
+			text-decoration: none;
+		}
+		a:hover{
+			text-decoration: underline;
+		}
+	
+		#orders{
+			display: block;
+			width: 50%;
+			float: left;
+			color: white;
+			background-color: #358C35;
+			padding-left: 2%;
+			padding-right: 1%;
+			margin-top: 5%;
+			margin-left: 5%;
+		}
 
-<p>Your order is complete, please pay <%= @lastorder.total_price %> NOK, with <% if @lastorder.pay %> cash <% else %> card <% end %>  when you get your order.</p>
+	</style>
+
+</head>
+
+<body>
+	
+	<p class="backto"><a href="/">Back to main page</a></p>
+
+	<div id=orders>
+	<h2><%= @title %></h2>
+	<p>Your order is complete, please pay <%= @lastorder.total_price %> NOK, with <% if @lastorder.pay %> cash <% else %> card <% end %>  when you get your order.</p>
 <p>Waiting time estimation is <%= @time %> minutes from now, please wait while seated. </p>
+
+</div>
+
+</body>
