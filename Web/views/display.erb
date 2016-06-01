@@ -1,1 +1,14 @@
-<p><img src="../drinks/<%= @id %>.jpg" width=30%></p>
+<head>
+    <style>
+        #drinkphoto{
+            margin-left: 5%;
+            margin-top: 5%;
+        }
+    </style>
+</head>
+
+<p class="backto"><a href="/list">Back to drink list</a></p>
+
+<body>
+    <p><img src="../drinks/<%= @id %>.jpg" height=30% id="drinkphoto"></p>
+</body>
