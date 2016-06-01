@@ -161,7 +161,7 @@ get '/deletedrink/:id' do
 	id = params[:id]
 	drink = Drink.get(id)
 	unless drink.nil?
-		path = File.join(Dir.pwd, "/public/drinks", drink.id.to_s)
+		path = File.join(Dir.pwd, "/public/drinks", drink.id.to_s+".jpg")
 		File.delete(path)
 		drink.destroy
 	end
