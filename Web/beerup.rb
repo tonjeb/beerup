@@ -60,6 +60,8 @@ end
 
 get '/' do
   @title = "Welcome to Beerup"
+  	# Estimated time before delivering drink order: sat to 3 minutes per drink
+	@time = (Order.count(:delivered => false) * 3)
   erb :welcome
 end
 
