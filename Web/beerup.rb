@@ -42,18 +42,15 @@ DataMapper.auto_upgrade!
 helpers do
 	include Sinatra::Authorization
 	
+	#error handler for adding new order
 	def form_error(message)
 		@title = "Beer ordering"
 		@drinks = Drink.all()
 		@order = Order.all()
 		@error = message
-		
-		Kernel.puts "error was #{message}"
-		
 		erb :form
 	end
-	
-	
+		
 end
 
 # set utf-8 for outgoing
@@ -80,19 +77,15 @@ end
 get '/form' do
 	@title = "Beer ordering"
 	@drinks = Drink.all()
-	@order = Order.all()
-
 	erb :form 
 end
 
 post '/order_do' do
 	tablenr = params[:tablenr]
-	Kernel.puts "Drinkorder: #{params[:drinkorder]}, antalld: #{params[:antalld]}"
 	$tot_price = 0
-	
+
 	if (params[:drinkorder].nil?)
 		form_error("Error: Form cannot be empty")
-		#redirect('/form')
 	else
 		# Loop through all orders once to check for errors
 		order_error = false
@@ -101,7 +94,6 @@ post '/order_do' do
 			antalld = params["antall_#{drink}"]		
 			if(antalld.nil? || antalld.empty?)
 				order_error = true
-				Kernel.puts "Error: Amount of #{drinks.drink_type} is blank"
 			end
 		end
 		
@@ -112,7 +104,6 @@ post '/order_do' do
 				antalld = params["antall_#{drink}"]	
 				$tot_price += (drinks.price * antalld.to_i)	
 				$price = (drinks.price * antalld.to_i)	
-				Kernel.puts "Bestilte: #{antalld} #{drinks.drink_type}"
 				@order = Order.new(:tablenr => params[:tablenr], :delivered => false, :drink_id => drink, :antalld => antalld, :pay=> (params[:pay] == "1"), :total_price => $price)
 				@order.save
 			end
@@ -120,7 +111,6 @@ post '/order_do' do
 		else
 			form_error("Error: Missing amount")
 		end
-		
 	end
 end
 
@@ -141,15 +131,13 @@ post '/create' do
 	require_admin
 	drink_type = params[:drink_type]
 	price = params[:price]
-	Kernel.puts "invoked create with #{params[:drink_type]}"
 	@drinks = Drink.new(:drink_type => params[:drink_type], :price => params[:price])
 	if @drinks.save
-		path = File.join(Dir.pwd, "/public/drinks", @drinks.id.to_s+".jpg") #params['imagefile'][:filename]
+		path = File.join(Dir.pwd, "/public/drinks", @drinks.id.to_s+".jpg")
 		File.open(path, "wb") do |f|
 			f.write(params['imagefile'][:tempfile].read)
 			redirect('/deletedrinks')
-		end
-	
+		end	
 	else
 		@error = "That drink already exists, please choose another name."
 		erb :new
@@ -176,7 +164,6 @@ get '/delete_order/:id' do
 		order.destroy
 	end
 	redirect('/orders')
-	
 end
 
 get '/list' do
@@ -209,26 +196,15 @@ end
 
 get '/leaderboard' do
 	@title = "Leaderboard"
-	#tst = Order.all(:fields => [:tablenr] :all.count)
 	timestamp = Time.now - (4*60*60)
-	Kernel.puts timestamp
-	#tst = DataMapper.repository(:default).adapter.select('SELECT tablenr, SUM(total_price) AS total_price FROM orders WHERE delivered = "t" GROUP BY tablenr ORDER BY total_price DESC')
 	orders = Order.aggregate(:tablenr, :total_price.sum, :delivered => true, :created_at.gte => timestamp, :order => [ :total_price.desc ])
 	@list = orders
-	Kernel.puts orders.inspect
-	#tst.each do |table|
-	#	Kernel.puts "test"
-		#table.total_price
-	#end
 	erb :leaderboard
 end
 
 get '/done' do
 	@title = "Order complete"
-	#orders = Order.last()
-	#Kernel.puts orders.inspect
 	@lastorder = Order.last()
-	#@price = orders.total_price
 	@price = params[:price]
 	
 	# Estimated time before delivering drink order: sat to 3 minutes per drink
